@@ -11,6 +11,8 @@ services:
       - ./services/nginx/logs:/var/log/nginx
     networks:
       - server_docker_network
+    depends_on:
+      - kirin-bear-web
 
   kirin-bear-web:
     container_name: kirin-bear-web
