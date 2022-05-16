@@ -1,10 +1,10 @@
 include .env
 
 docker-up:
-	docker-compose up -d
+	docker compose up -d
 
 docker-down:
-	docker-compose down --remove-orphans
+	docker compose down --remove-orphans
 
 up: docker-up
 down: docker-down
