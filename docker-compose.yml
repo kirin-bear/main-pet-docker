@@ -13,12 +13,16 @@ services:
       - server_docker_network
     depends_on:
       - kirin-bear-web
+      - kirin-bear-api
 
   kirin-bear-api:
     container_name: kirin-bear-api
     build:
       context: ${KIRIN_BEAR_API_PATH}/
+      target: ${ENV}
       dockerfile: Dockerfile
+    volumes:
+      - ${KIRIN_BEAR_API_PATH}:/var/www
     networks:
       - server_docker_network
 

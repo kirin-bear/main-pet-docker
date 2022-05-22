@@ -1,5 +1,8 @@
 include .env
 
+docker-pull:
+	docker compose pull
+
 docker-up:
 	docker compose up -d
 
@@ -9,10 +12,14 @@ docker-down:
 docker-build:
 	docker compose build
 
+docker-down-clear:
+	docker compose down -v --remove-orphans
+
 up: docker-up
 down: docker-down
 restart: down up
 build: docker-down docker-build
+init: docker-down-clear docker-pull docker-build docker-up
 
 kirin-bear-web-pull:
 	cd ${KIRIN_BEAR_WEB_PATH}
