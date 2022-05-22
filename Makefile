@@ -12,7 +12,7 @@ docker-build:
 up: docker-up
 down: docker-down
 restart: down up
-build: docker-down docker-build docker-up
+build: docker-down docker-build
 
 kirin-bear-web-pull:
 	cd ${KIRIN_BEAR_WEB_PATH}
