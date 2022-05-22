@@ -13,3 +13,7 @@ restart: down up
 kirin-bear-web-pull:
 	cd ${KIRIN_BEAR_WEB_PATH}
 	git pull
+
+kirin-bear-api-pull:
+	cd ${KIRIN_BEAR_API_PATH}
+	git pull

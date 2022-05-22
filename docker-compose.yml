@@ -14,6 +14,14 @@ services:
     depends_on:
       - kirin-bear-web
 
+  kirin-bear-api:
+    container_name: kirin-bear-api
+    build:
+      context: ${KIRIN_BEAR_API_PATH}/
+      dockerfile: Dockerfile
+    networks:
+      - server_docker_network
+
   kirin-bear-web:
     container_name: kirin-bear-web
     build:
