@@ -15,6 +15,9 @@ docker-build:
 docker-down-clear:
 	docker compose down -v --remove-orphans
 
+docker-clear:
+	docker system prune -af
+
 up: docker-up
 down: docker-down
 restart: down up
