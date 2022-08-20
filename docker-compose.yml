@@ -6,6 +6,7 @@ services:
     image: nginx:1.21.6-alpine
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - ./services/nginx/conf.d:/etc/nginx/conf.d
       - ./services/nginx/logs:/var/log/nginx
