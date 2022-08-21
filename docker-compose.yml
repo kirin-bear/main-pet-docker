@@ -8,8 +8,9 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./services/nginx/conf.d:/etc/nginx/conf.d
+      - ./services/nginx/conf.d/${ENV}:/etc/nginx/conf.d
       - ./services/nginx/logs:/var/log/nginx
+      - ${SSL_PATH}:/etc/nginx/ssl
     networks:
       - server_docker_network
     depends_on:
