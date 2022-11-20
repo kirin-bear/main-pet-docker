@@ -12,10 +12,28 @@ services:
       - ./services/nginx/logs:/var/log/nginx
       - ${SSL_PATH}:/etc/nginx/ssl
     networks:
-      - server_docker_network
+      - docker_network
     depends_on:
       - kirin-bear-web
       - kirin-bear-api
+
+  mysql:
+    container_name: mysql
+    image: mysql:8.0.31
+    # слушаешь извне
+    ports:
+      - "3306:3306"
+    # для других контейнеров
+    expose:
+      - "3306"
+    environment:
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    volumes:
+      # правильнее сделать через отдельный volume
+      - ./services/mysql/lib:/var/lib/mysql
+    networks:
+      - docker_network
 
   kirin-bear-api:
     container_name: kirin-bear-api
@@ -26,7 +44,7 @@ services:
     volumes:
       - ${KIRIN_BEAR_API_PATH}:/var/www
     networks:
-      - server_docker_network
+      - docker_network
 
   kirin-bear-web:
     container_name: kirin-bear-web
@@ -35,10 +53,10 @@ services:
       dockerfile: Dockerfile
       target: ${ENV}
     networks:
-      - server_docker_network
+      - docker_network
 
 
 networks:
-  server_docker_network:
+  docker_network:
     ipam:
       driver: default
