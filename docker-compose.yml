@@ -53,6 +53,10 @@ services:
       context: ${KIRIN_BEAR_WEB_PATH}/
       dockerfile: Dockerfile
       target: ${ENV}
+    volumes:
+      # для xmr пришлось вынести сюда - надо переделать на docker-compose.override.yml
+      # чтобы на проде не было ненужных volumes, так как там используется только конечный набор статики
+      - ${KIRIN_BEAR_WEB_PATH}/src:/home/node/app/src:rw
     networks:
       - docker_network
 
