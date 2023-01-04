@@ -24,8 +24,10 @@ restart: down up
 build: docker-down docker-build
 init: docker-down-clear docker-pull docker-build docker-up
 
-kirin-bear-web-pull:
+kirin-bear-web-deploy:
 	cd ${KIRIN_BEAR_WEB_PATH} && git pull
+	docker composer restart kirin-bear-web
+
 
 kirin-bear-api-deploy:
 	cd ${KIRIN_BEAR_API_PATH} && git pull
