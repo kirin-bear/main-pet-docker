@@ -30,3 +30,4 @@ kirin-bear-web-pull:
 kirin-bear-api-deploy:
 	cd ${KIRIN_BEAR_API_PATH} && git pull
 	docker compose exec kirin-bear-api sh -c 'composer deploy'
+	docker compose restart kirin-bear-api
