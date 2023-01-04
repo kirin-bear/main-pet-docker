@@ -26,7 +26,7 @@ init: docker-down-clear docker-pull docker-build docker-up
 
 kirin-bear-web-deploy:
 	cd ${KIRIN_BEAR_WEB_PATH} && git pull
-	docker composer restart kirin-bear-web
+	docker compose restart kirin-bear-web
 
 
 kirin-bear-api-deploy:
