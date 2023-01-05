@@ -4,13 +4,13 @@ docker-pull:
 	docker compose pull
 
 docker-up:
-	docker compose up -d
+	./bin/docker-compose-up.sh
 
 docker-down:
 	docker compose down --remove-orphans
 
 docker-build:
-	docker compose build
+	./bin/docker-compose-build.sh
 
 docker-down-clear:
 	docker compose down -v --remove-orphans
@@ -26,8 +26,9 @@ init: docker-down-clear docker-pull docker-build docker-up
 
 kirin-bear-web-deploy:
 	cd ${KIRIN_BEAR_WEB_PATH} && git pull
-	docker compose restart kirin-bear-web
-
+	docker compose down kirin-bear-web
+	docker compose build kirin-bear-web
+	docker compose up kirin-bear-web
 
 kirin-bear-api-deploy:
 	cd ${KIRIN_BEAR_API_PATH} && git pull

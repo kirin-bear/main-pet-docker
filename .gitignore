@@ -10,3 +10,4 @@ TEST*.xml
 apps/*
 
 
+docker-compose.override.yml
