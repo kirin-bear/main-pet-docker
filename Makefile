@@ -4,13 +4,13 @@ docker-pull:
 	docker compose pull
 
 docker-up:
-	./bin/docker-compose-up.sh
+	docker composer up -d
 
 docker-down:
 	docker compose down --remove-orphans
 
 docker-build:
-	./bin/docker-compose-build.sh
+	docker compose build
 
 docker-down-clear:
 	docker compose down -v --remove-orphans
