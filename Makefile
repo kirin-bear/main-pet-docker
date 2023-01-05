@@ -4,7 +4,7 @@ docker-pull:
 	docker compose pull
 
 docker-up:
-	docker composer up -d
+	docker compose up -d
 
 docker-down:
 	docker compose down --remove-orphans
