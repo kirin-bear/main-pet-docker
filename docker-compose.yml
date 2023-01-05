@@ -53,6 +53,7 @@ services:
       context: ${KIRIN_BEAR_WEB_PATH}/
       dockerfile: Dockerfile
       target: ${ENV}
+    volumes: []
     networks:
       - docker_network
 

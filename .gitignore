@@ -9,4 +9,5 @@ TEST*.xml
 .env
 apps/*
 
+#docker override
 docker-compose.override.yml
