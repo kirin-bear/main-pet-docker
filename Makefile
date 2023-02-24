@@ -33,5 +33,5 @@ deploy-kirin-bear-web:
 deploy-kirin-bear-api:
 	cd ${KIRIN_BEAR_API_PATH} && git pull
 	make down
-	docker compose build kirin-bear-web
+	docker compose build kirin-bear-api
 	make up
