@@ -24,13 +24,14 @@ restart: down up
 build: docker-down docker-build
 init: docker-down-clear docker-pull docker-build docker-up
 
-kirin-bear-web-deploy:
+deploy-kirin-bear-web:
 	cd ${KIRIN_BEAR_WEB_PATH} && git pull
 	make down
 	docker compose build kirin-bear-web
 	make up
 
-kirin-bear-api-deploy:
+deploy-kirin-bear-api:
 	cd ${KIRIN_BEAR_API_PATH} && git pull
-	docker compose exec kirin-bear-api sh -c 'composer deploy'
-	docker compose restart kirin-bear-api
+	make down
+	docker compose build kirin-bear-web
+	make up
