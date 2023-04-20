@@ -18,6 +18,16 @@ services:
       - kirin-bear-web
       - kirin-bear-api
 
+  grafana:
+    container_name: grafana
+    image: grafana/grafana-oss
+    expose:
+      - "3000"
+    volumes:
+      - ./services/grafana/data:/var/lib/grafana
+    networks:
+      - docker_network
+
   mysql:
     container_name: mysql
     image: mysql:8.0.31
