@@ -24,7 +24,7 @@ services:
     expose:
       - "3000"
     volumes:
-      - ./services/grafana/data:/var/lib/grafana
+      - ./services/grafana/data:/var/lib/grafana:rw
     networks:
       - docker_network
 
