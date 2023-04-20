@@ -21,6 +21,7 @@ services:
   grafana:
     container_name: grafana
     image: grafana/grafana-oss
+    user: '104'
     expose:
       - "3000"
     volumes:
