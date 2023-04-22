@@ -25,6 +25,7 @@ services:
       - "3000"
     volumes:
       - ./services/grafana/data:/var/lib/grafana
+    user: ${GRAFANA_USER}
     networks:
       - docker_network
 
