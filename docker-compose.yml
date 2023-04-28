@@ -51,8 +51,8 @@ services:
     container_name: minio
     image: minio/minio
     expose:
-      - "9000"
-      - "9001"
+      - "9000" # для конечных файлов
+      - "9001" # console
     volumes:
       - ./services/minio/data:/data
     environment:
