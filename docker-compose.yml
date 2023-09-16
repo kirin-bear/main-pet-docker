@@ -47,6 +47,19 @@ services:
     networks:
       - docker_network
 
+  rabbitmq:
+    image: rabbitmq:3.13-rc-management-alpine
+    container_name: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+      RABBITMQ_NODENAME: rabbit@localhost
+    ports:
+      - "5672:5672" # for AMQP communication
+      - "15672:15672" # for management interface
+    networks:
+      - docker_network
+
   minio:
     container_name: minio
     image: minio/minio
