@@ -54,9 +54,9 @@ services:
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
       RABBITMQ_NODENAME: rabbit@localhost
-    ports:
-      - "5672:5672" # for AMQP communication
-      - "15672:15672" # for management interface
+    expose:
+      - "5672" # for AMQP communication
+      - "15672" # for management interface
     networks:
       - docker_network
 
