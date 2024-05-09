@@ -29,9 +29,10 @@ deploy-kirin-bear-web:
 	make down
 	docker compose build kirin-bear-web
 	make up
+	make docker-clear
 
 deploy-kirin-bear-api:
 	cd ${KIRIN_BEAR_API_PATH} && git pull
-	make down
 	docker compose build kirin-bear-api
 	make up
+	make docker-clear
