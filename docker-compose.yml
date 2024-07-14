@@ -80,7 +80,7 @@ services:
     build:
       context: ${KIRIN_BEAR_API_PATH}/
       dockerfile: Dockerfile
-      target: ${ENV}
+      target: ${KIRIB_BEAR_API_ENV}
     networks:
       - docker_network
 
@@ -89,7 +89,7 @@ services:
     build:
       context: ${KIRIN_BEAR_WEB_PATH}/
       dockerfile: Dockerfile
-      target: ${ENV}
+      target: ${KIRIB_BEAR_WEB_ENV}
     networks:
       - docker_network
 
