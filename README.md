@@ -11,15 +11,32 @@
 ```nginx configuration
 server {
     listen 80;
-    server_name example.com;
-
-    location / {
-        proxy_pass http://192.168.100.100; # IP-адрес контейнера Docker
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    }
+    server_name *;
+    return 301 https://$host$request_uri;
 }
+
+server {
+        listen 443 ssl;
+        server_name *;
+
+        ssl_certificate 'path_to_ssl.cer';
+        ssl_certificate_key 'path_to_ssl.key';
+
+        location / {
+
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Forwarded-Proto $scheme;
+                proxy_set_header X-NginX-Proxy true;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection "upgrade";
+
+                proxy_pass http://ip_address_docker_container:port; # IP-адрес контейнера Docker
+        }
+}
+
+
 ```
 
 ## Конфигурация Docker
@@ -35,11 +52,11 @@ services:
     container_name: nginx_container
     networks:
       custom_network:
-        ipv4_address: 192.168.100.100
+        ipv4_address: 'ip_address_docker_container'
     volumes:
       - ./nginx_container.conf:/etc/nginx/conf.d/default.conf
     ports:
-      - "8080:80" # Опционально: открываем порт для тестов с хоста
+      - "8080:8080"
 
 networks:
   custom_network:
