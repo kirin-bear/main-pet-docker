@@ -5,7 +5,7 @@ services:
     container_name: nginx
     image: nginx:1.21.6-alpine
     ports:
-      - "8081:80"
+      - "8081:8081"
       - "3001:3001"
     volumes:
       - ./services/nginx/conf.d/${ENV}:/etc/nginx/conf.d
