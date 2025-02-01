@@ -5,15 +5,15 @@ services:
     container_name: nginx
     image: nginx:1.21.6-alpine
     ports:
-      - "80:80"
-      - "443:443"
+      - "8081:8081"
       - "3001:3001"
     volumes:
       - ./services/nginx/conf.d/${ENV}:/etc/nginx/conf.d
       - ./services/nginx/logs:/var/log/nginx
       - ${SSL_PATH}:/etc/nginx/ssl
     networks:
-      - docker_network
+      kirin_bear_network:
+        ipv4_address: ${SUBNET_NGINX_IP}
     depends_on:
       - kirin-bear-web
       - kirin-bear-api
@@ -27,7 +27,7 @@ services:
       - ./services/grafana/data:/var/lib/grafana
     user: ${GRAFANA_USER}
     networks:
-      - docker_network
+      - kirin_bear_network
 
   mysql:
     container_name: mysql
@@ -45,7 +45,7 @@ services:
       # TODO: правильнее сделать через отдельный volume
       - ./services/mysql/lib:/var/lib/mysql
     networks:
-      - docker_network
+      - kirin_bear_network
 
   rabbitmq:
     image: rabbitmq:3.13-rc-management-alpine
@@ -58,7 +58,7 @@ services:
       - "5672" # for AMQP communication
       - "15672" # for management interface
     networks:
-      - docker_network
+      - kirin_bear_network
 
   minio:
     container_name: minio
@@ -73,7 +73,7 @@ services:
       MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
     command: server --console-address=":9001" /data
     networks:
-      - docker_network
+      - kirin_bear_network
 
   kirin-bear-api:
     container_name: kirin-bear-api
@@ -82,7 +82,7 @@ services:
       dockerfile: Dockerfile
       target: ${KIRIN_BEAR_API_ENV}
     networks:
-      - docker_network
+      - kirin_bear_network
 
   kirin-bear-web:
     container_name: kirin-bear-web
@@ -91,9 +91,11 @@ services:
       dockerfile: Dockerfile
       target: ${KIRIN_BEAR_WEB_ENV}
     networks:
-      - docker_network
+      - kirin_bear_network
 
 networks:
-  docker_network:
+  kirin_bear_network:
     ipam:
       driver: default
+      config:
+        - subnet: ${SUBNET}
